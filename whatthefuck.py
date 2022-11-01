@@ -37,7 +37,7 @@ root.title("Ristinolla")
 
 uudestaan = PhotoImage(file=r"uudestaan1.png")
 lopeta = PhotoImage(file=r"lopeta1.png")
-
+# cat.png, mouse.png, hover.png, not_pressed.png, lopeta_hover.png, uudestaan_hover.png
 
 #_______________________________________________________________________________
 #Pelaaja tekstit, saisko vaikka värin muuttumaan kun on oma vuoro?
