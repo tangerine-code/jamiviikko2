@@ -21,6 +21,25 @@ def uusiksi():
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
+class hoveri(Button):
+    """Pelialueen ruudukon nappien hover."""
+    def __init__(self, root, kuva1, kuva2, *args, **kwargs):
+        super().__init__(root, *args, **kwargs)
+
+        self.kuva1 = ImageTk.PhotoImage(Image.open(kuva1))
+        self.kuva2 = ImageTk.PhotoImage(Image.open(kuva2))
+
+        self['image'] = self.kuva1
+        
+        self.bind('<Enter>', self.onEnter1)
+        self.bind('<Leave>', self.onLeave1)
+
+    def onEnter1(self, event):
+        self.config(image=self.kuva2)  
+
+    def onLeave1(self, event):
+        self.config(image=self.kuva1)
+
 def onEnter(event):
     global img
     img = ImageTk.PhotoImage(Image.open(r'lopeta_hover.png'))
@@ -29,12 +48,13 @@ def onEnter(event):
 def onEnter2(event):
     global img2
     img2 = ImageTk.PhotoImage(Image.open(r'uudestaan_hover.png'))
-    uudestaan_nappi.config(image=img2)    
+    uudestaan_nappi.config(image=img2)   
 
 def onLeave(event):
     global img
     img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
     lopeta_nappi.config(image=img)
+
 def onLeave2(event):
     global img2
     img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
@@ -55,7 +75,7 @@ center_y = int(screen_height/2 - window_height / 2)
 root.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 root.resizable(False, False)
 root.title("Ristinolla")
-root.attributes('-topmost', 1)
+#Taustaväri viä valkoiseksi??
 
 #_______________________________________________________________________________
 #Tähän väliin kaikki kuvat mitä tarvitaan
@@ -64,27 +84,24 @@ img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
 img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
 kissa = PhotoImage(file=r"cat.png")
 hiiri = PhotoImage(file=r"mouse.png")
-koskematon = ImageTk.PhotoImage(Image.open(r"not_pressed.png"))
-img3 = PhotoImage(file=r"hover.png")
+peli_kuva1 = r"not_pressed.png"
+peli_kuva2 = r"hover.png"
 iconi =PhotoImage(r'icon.ico')
 
+#______________________________________________________________________________ 
 # Pelialue
 
 play_area = tk.Frame(root, width = 300, height = 400)  
-XO_points = []  
-class XOPoint:  
+XO_points = []
+
+class XOPoint:
+    """Peliruudukko."""
     def __init__(self, x, y):  
         self.x = x  
         self.y = y  
         self.value = None  
-        nappi = Button(play_area, image = koskematon, borderwidth = 0, width = 100, height = 100)
-        nappi.bind('<Enter>', onEnter)
-        nappi.bind('<Leave>', onLeave)
-        nappi.grid(row = x, column = y, pady = 5, padx = 5)
-  
-    def reset(self):  
-        self.button.configure(text = "", bg = 'white')  
-        self.value = None
+        self.nappi = hoveri(play_area,  kuva1 = peli_kuva1, kuva2 = peli_kuva2, borderwidth = 0, width = 100, height = 100)
+        self.nappi.grid(row = x, column = y, pady = 5, padx = 5) 
 
 for x in range(1, 4):
     for y in range(1, 4):
