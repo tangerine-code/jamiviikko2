@@ -25,6 +25,7 @@ def onEnter(event):
     global img
     img = ImageTk.PhotoImage(Image.open(r'lopeta_hover.png'))
     lopeta_nappi.config(image=img)
+    global img2
     img2 = ImageTk.PhotoImage(Image.open(r'uudestaan_hover.png'))
     uudestaan_nappi.config(image=img2)
     img3 = ImageTk.PhotoImage(Image.open(r'hover.png'))
@@ -34,6 +35,7 @@ def onLeave(event):
     global img
     img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
     lopeta_nappi.config(image=img)
+    global img2
     img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
     uudestaan_nappi.config(image=img2)
 
