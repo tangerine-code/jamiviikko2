@@ -35,10 +35,17 @@ class pelipainike(Button):
         
 
     def onEnter1(self, event):
-        self.config(image=self.kuva2)  
+        if self.image(self.kuva1):
+            self.config(image=self.kuva2)
+        else:
+            pass
 
     def onLeave1(self, event):
-        self.config(image=self.kuva1)
+        if kissa_pisteet <= 0 and hiiri_pisteet <= 0:
+            self.config(image=self.kuva1)
+        else:
+            self.config(image=self.kissa)
+
 
 def onEnter(event):
     """Kun kursori menee 'lopeta' napin päälle, kuva muuttuu tummemmaksi"""
@@ -93,10 +100,11 @@ iconi =PhotoImage(r'icon.ico')
 #________________________________PELIALUE_______________________________________
 
 vuoro = kissa
+kissa_pisteet = 0
+hiiri_pisteet = 0
 play_area = tk.Frame(root, width = 300, height = 400)  
 #XO_points = []
-kissa_pisteet = []
-hiiri_pisteet = []
+
 class XOPoint:
     """Peliruudukko."""
     def __init__(self, x, y):  
@@ -107,15 +115,17 @@ class XOPoint:
         self.nappi.grid(row = x, column = y, pady = 5, padx = 5)
 
     def set(self):
+        global kissa_pisteet
+        global hiiri_pisteet
         global vuoro
         if not self.value:
             self.nappi.configure(image = vuoro)
             self.value = vuoro 
             if vuoro == kissa:
-                kissa_pisteet.append(self)
+                kissa_pisteet += 1
                 vuoro = hiiri
             elif vuoro == hiiri:
-                hiiri_pisteet.append(self)
+                hiiri_pisteet += 1
                 vuoro = kissa
 
 for x in range(1, 4):
