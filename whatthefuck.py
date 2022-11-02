@@ -26,7 +26,9 @@ def onEnter(event):
     img = ImageTk.PhotoImage(Image.open(r'lopeta_hover.png'))
     lopeta_nappi.config(image=img)
     img2 = ImageTk.PhotoImage(Image.open(r'uudestaan_hover.png'))
-    uudestaan_nappi.config(image=img2)    
+    uudestaan_nappi.config(image=img2)
+    img3 = ImageTk.PhotoImage(Image.open(r'hover.png'))
+    #nappi.config(image = img3)
 
 def onLeave(event):
     global img
@@ -59,8 +61,8 @@ img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
 img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
 kissa = PhotoImage(file=r"cat.png")
 hiiri = PhotoImage(file=r"mouse.png")
-koskematon = PhotoImage(file=r"not_pressed.png")
-hoveri = PhotoImage(file=r"hover.png")
+koskematon = ImageTk.PhotoImage(Image.open(r"not_pressed.png"))
+img3 = PhotoImage(file=r"hover.png")
 iconi =PhotoImage(r'icon.ico')
 
 # Pelialue
@@ -72,32 +74,36 @@ class XOPoint:
         self.x = x  
         self.y = y  
         self.value = None  
-        self.button = Button(play_area, image = koskematon, text = '', width = 100, height = 100)  
-        self.button.grid(row = x, column = y, pady = 5, padx = 5)  
+        nappi = Button(play_area, image = koskematon, borderwidth = 0, width = 100, height = 100)
+        nappi.bind('<Enter>', onEnter)
+        nappi.bind('<Leave>', onLeave)
+        nappi.grid(row = x, column = y, pady = 5, padx = 5)
   
     def reset(self):  
         self.button.configure(text = "", bg = 'white')  
-        self.value = None  
+        self.value = None
+
 for x in range(1, 4):
     for y in range(1, 4):
-        XOPoint(x, y) 
+        XOPoint(x, y)
+
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
 
 #_______________________________________________________________________________
 #Pelaaja tekstit, saisko vaikka värin muuttumaan kun on oma vuoro?
 
 lbl = Label(root, text="Pelaaja 1: Kissa", font=('Verdana', '15'))
-lbl.place(x=410, y=25)
+lbl.place(x=410, y=35)
 
 lbl2 = Label(root, text="Pelaaja 2: Hiiri", font=('Verdana', '15'))
-lbl2.place(x=410, y=55)
+lbl2.place(x=410, y=60)
 
 #_______________________________________________________________________________
 #Oikean alakulman nappulat "Uudestaan" ja "Lopeta"
 
 lopeta_nappi = Button(root, image = img, borderwidth=0, height= 75, width=189,
 command=root.destroy)
-lopeta_nappi.place(x=400, y=290)
+lopeta_nappi.place(x=400, y=285)
 lopeta_nappi.bind('<Enter>',  onEnter)
 lopeta_nappi.bind('<Leave>',  onLeave)
 
