@@ -5,18 +5,35 @@ from tkinter import ttk
 from tkinter import Button
 from ctypes import windll
 import tkinter as tk
+from tkinter.font import BOLD
 from tkinter.messagebox import showinfo
+import sys
+import os
 from PIL import Image, ImageTk
 
 #_______________________________________________________________________________
 #Tähän väliin funktiot
 
-def klikattu():
-    viesti = f"höpönlöpönlöötä tää on vaan esimerkki"
-    showinfo(
-        title="tiedot",
-        message=viesti
-    )
+def uusiksi():
+    """Käynnistää ikkunan uudestaan. Tää funktio ei palauta mitään,
+    eli jos haluaa laskea voitot ja häviöt niin täytyy ottaa talteen kaikki
+     tiedot ennen tämän funktion kutsumista kutsumista!"""
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+def onEnter(event):
+    global img
+    img = ImageTk.PhotoImage(Image.open(r'lopeta_hover.png'))
+    lopeta_nappi.config(image=img)
+    img2 = ImageTk.PhotoImage(Image.open(r'uudestaan_hover.png'))
+    uudestaan_nappi.config(image=img2)    
+
+def onLeave(event):
+    global img
+    img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
+    lopeta_nappi.config(image=img)
+    img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
+    uudestaan_nappi.config(image=img2)
 
 #_______________________________________________________________________________
 #Runko
@@ -38,8 +55,8 @@ root.title("Ristinolla")
 #_______________________________________________________________________________
 #Tähän väliin kaikki kuvat mitä tarvitaan
 
-uudestaan = PhotoImage(file=r"uudestaan1.png")
-lopeta = PhotoImage(file=r"lopeta1.png")
+img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
+img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
 kissa = PhotoImage(file=r"cat.png")
 hiiri = PhotoImage(file=r"mouse.png")
 koskematon = PhotoImage(file=r"not_pressed.png")
@@ -55,7 +72,7 @@ class XOPoint:
         self.x = x  
         self.y = y  
         self.value = None  
-        self.button = tk.Button(play_area, text = '', image = koskematon, width = 100, height = 100)  
+        self.button = Button(play_area, image = koskematon, text = '', width = 100, height = 100)  
         self.button.grid(row = x, column = y, pady = 5, padx = 5)  
   
     def reset(self):  
@@ -65,7 +82,6 @@ for x in range(1, 4):
     for y in range(1, 4):
         XOPoint(x, y) 
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
-
 
 #_______________________________________________________________________________
 #Pelaaja tekstit, saisko vaikka värin muuttumaan kun on oma vuoro?
@@ -79,15 +95,17 @@ lbl2.place(x=410, y=55)
 #_______________________________________________________________________________
 #Oikean alakulman nappulat "Uudestaan" ja "Lopeta"
 
-"""Tälle napille toiminto joka refressaa ikkunan"""
-uudestaan_nappi = Button(image = uudestaan, borderwidth=0, height= 75, width=189,
-command = klikattu)
-uudestaan_nappi.place(x=400, y=290)
-
-"""Lopeta ei tarvitse funktioo kun destroy command riittää"""
-lopeta_nappi = Button(root, image = lopeta, borderwidth=0, height= 75, width=189,
+lopeta_nappi = Button(root, image = img, borderwidth=0, height= 75, width=189,
 command=root.destroy)
-lopeta_nappi.place(x=400, y=200)
+lopeta_nappi.place(x=400, y=290)
+lopeta_nappi.bind('<Enter>',  onEnter)
+lopeta_nappi.bind('<Leave>',  onLeave)
+
+uudestaan_nappi = Button(root, image = img2, borderwidth=0, height= 75, width=189,
+command = uusiksi)
+uudestaan_nappi.place(x=400, y=200)
+uudestaan_nappi.bind('<Enter>',  onEnter)
+uudestaan_nappi.bind('<Leave>',  onLeave)
 
 #_______________________________________________________________________________
 #Lopetus hommat ja ikkunan terävyyden säätö
