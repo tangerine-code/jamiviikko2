@@ -23,21 +23,21 @@ def uusiksi():
 
 def onEnter(event):
     global img
-    img = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\lopeta_hover.png'))
+    img = ImageTk.PhotoImage(Image.open(r'lopeta_hover.png'))
     lopeta_nappi.config(image=img)
 
 def onEnter2(event):
     global img2
-    img2 = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\uudestaan_hover.png'))
+    img2 = ImageTk.PhotoImage(Image.open(r'uudestaan_hover.png'))
     uudestaan_nappi.config(image=img2)    
 
 def onLeave(event):
     global img
-    img = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\lopeta1.png'))
+    img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
     lopeta_nappi.config(image=img)
 def onLeave2(event):
     global img2
-    img2 = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\uudestaan1.png'))
+    img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
     uudestaan_nappi.config(image=img2)
 
 #_______________________________________________________________________________
