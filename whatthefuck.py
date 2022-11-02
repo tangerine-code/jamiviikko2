@@ -23,20 +23,21 @@ def uusiksi():
 
 def onEnter(event):
     global img
-    img = ImageTk.PhotoImage(Image.open(r'lopeta_hover.png'))
+    img = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\lopeta_hover.png'))
     lopeta_nappi.config(image=img)
+
+def onEnter2(event):
     global img2
-    img2 = ImageTk.PhotoImage(Image.open(r'uudestaan_hover.png'))
-    uudestaan_nappi.config(image=img2)
-    img3 = ImageTk.PhotoImage(Image.open(r'hover.png'))
-    #nappi.config(image = img3)
+    img2 = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\uudestaan_hover.png'))
+    uudestaan_nappi.config(image=img2)    
 
 def onLeave(event):
     global img
-    img = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
+    img = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\lopeta1.png'))
     lopeta_nappi.config(image=img)
+def onLeave2(event):
     global img2
-    img2 = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
+    img2 = ImageTk.PhotoImage(Image.open(r'C:\Users\roksa\Desktop\JAMIsysky\uudestaan1.png'))
     uudestaan_nappi.config(image=img2)
 
 #_______________________________________________________________________________
@@ -112,8 +113,8 @@ lopeta_nappi.bind('<Leave>',  onLeave)
 uudestaan_nappi = Button(root, image = img2, borderwidth=0, height= 75, width=189,
 command = uusiksi)
 uudestaan_nappi.place(x=400, y=200)
-uudestaan_nappi.bind('<Enter>',  onEnter)
-uudestaan_nappi.bind('<Leave>',  onLeave)
+uudestaan_nappi.bind('<Enter>',  onEnter2)
+uudestaan_nappi.bind('<Leave>',  onLeave2)
 
 #_______________________________________________________________________________
 #Lopetus hommat ja ikkunan terävyyden säätö
