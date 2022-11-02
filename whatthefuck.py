@@ -136,5 +136,5 @@ uudestaan_nappi.bind('<Leave>',  onLeave2)
 #___________________________________MUUT________________________________________
 
 windll.shcore.SetProcessDpiAwareness(1)
-
+root.iconbitmap(iconi)
 root.mainloop()
