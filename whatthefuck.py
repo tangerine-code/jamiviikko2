@@ -86,10 +86,10 @@ play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
 #_______________________________________________________________________________
 #Pelaaja tekstit, saisko vaikka värin muuttumaan kun on oma vuoro?
 
-lbl = Label(root, text="Pelaaja 1: Kissa", font=('Verdana', '15'))
+lbl = Label(root, text="Pelaaja 1: Kissa", font=('Verdana', '15', BOLD), fg='#543f2a')
 lbl.place(x=410, y=25)
 
-lbl2 = Label(root, text="Pelaaja 2: Hiiri", font=('Verdana', '15'))
+lbl2 = Label(root, text="Pelaaja 2: Hiiri", font=('Verdana', '15', BOLD), fg='#543f2a')
 lbl2.place(x=410, y=55)
 
 #_______________________________________________________________________________
