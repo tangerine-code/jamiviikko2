@@ -20,7 +20,7 @@ def uusiksi():
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
-class hoveri(Button):
+class pelipainike(Button):
     """Pelialueen ruudukon nappien hover."""
     def __init__(self, root, kuva1, kuva2, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
@@ -32,6 +32,7 @@ class hoveri(Button):
         
         self.bind('<Enter>', self.onEnter1)
         self.bind('<Leave>', self.onLeave1)
+        
 
     def onEnter1(self, event):
         self.config(image=self.kuva2)  
@@ -85,24 +86,37 @@ lopeta = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
 uudestaan = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
 kissa = PhotoImage(file=r"cat.png")
 hiiri = PhotoImage(file=r"mouse.png")
-peli_kuva1 = r"not_pressed.png"
-peli_kuva2 = r"hover.png"
+koskematon = r"not_pressed.png"
+hovervari = r"hover.png"
 iconi =PhotoImage(r'icon.ico')
 
 #________________________________PELIALUE_______________________________________
 
+vuoro = kissa
 play_area = tk.Frame(root, width = 300, height = 400)  
-XO_points = []
-
+#XO_points = []
+kissa_pisteet = []
+hiiri_pisteet = []
 class XOPoint:
     """Peliruudukko."""
     def __init__(self, x, y):  
         self.x = x  
         self.y = y  
         self.value = None  
-        self.nappi = hoveri(play_area,  kuva1 = peli_kuva1, kuva2 = peli_kuva2, 
-        borderwidth = 0, width = 100, height = 100)
-        self.nappi.grid(row = x, column = y, pady = 5, padx = 5) 
+        self.nappi = pelipainike(play_area, kuva1 = koskematon, kuva2 = hovervari, borderwidth = 0, width = 100, height = 100, command = self.set)
+        self.nappi.grid(row = x, column = y, pady = 5, padx = 5)
+
+    def set(self):
+        global vuoro
+        if not self.value:
+            self.nappi.configure(image = vuoro)
+            self.value = vuoro 
+            if vuoro == kissa:
+                kissa_pisteet.append(self)
+                vuoro = hiiri
+            elif vuoro == hiiri:
+                hiiri_pisteet.append(self)
+                vuoro = kissa
 
 for x in range(1, 4):
     for y in range(1, 4):
