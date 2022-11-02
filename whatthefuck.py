@@ -55,7 +55,7 @@ center_y = int(screen_height/2 - window_height / 2)
 root.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 root.resizable(False, False)
 root.title("Ristinolla")
-#Taustaväri viä valkoiseksi??
+root.attributes('-topmost', 1)
 
 #_______________________________________________________________________________
 #Tähän väliin kaikki kuvat mitä tarvitaan
