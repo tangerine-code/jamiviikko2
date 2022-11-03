@@ -142,29 +142,29 @@ class Voittotilanne:
         self.x3 = x3
         self.y3 = y3
     def check(self, for_chr):
-        p1_satisfied = False
-        p2_satisfied = False
-        p3_satisfied = False
+        p1_toteutuu = False
+        p2_toteutuu = False
+        p3_toteutuu = False
 
         if for_chr == kissa:
-            for point in kissa_pisteet:
-                if point.x == self.x1 and point.y == self.y1:
-                    p1_satisfied = True
-                elif point.x == self.x2 and point.y == self.y2:
-                    p2_satisfied = True
-                elif point.x == self.x3 and point.y == self.y3:
-                    p3_satisfied = True
+            for piste in kissa_pisteet:
+                if piste.x == self.x1 and piste.y == self.y1:
+                    p1_toteutuu = True
+                elif piste.x == self.x2 and piste.y == self.y2:
+                    p2_toteutuu = True
+                elif piste.x == self.x3 and piste.y == self.y3:
+                    p3_toteutuu = True
         elif for_chr == hiiri:
-            for point in hiiri_pisteet:
-                if point.x == self.x1 and point.y == self.y1:
-                    p1_satisfied = True
-                elif point.x == self.x2 and point.y == self.y2:
-                    p2_satisfied = True
-                elif point.x == self.x3 and point.y == self.y3:
-                    p3_satisfied = True
-        return all([p1_satisfied, p2_satisfied, p3_satisfied])
+            for piste in hiiri_pisteet:
+                if piste.x == self.x1 and piste.y == self.y1:
+                    p1_toteutuu = True
+                elif piste.x == self.x2 and piste.y == self.y2:
+                    p2_toteutuu = True
+                elif piste.x == self.x3 and piste.y == self.y3:
+                    p3_toteutuu = True
+        return all([p1_toteutuu, p2_toteutuu, p3_toteutuu])
 
-winning_possibilities = [
+voittomahdollisuudet = [
     Voittotilanne(1, 1, 1, 2, 1, 3),
     Voittotilanne(2, 1, 2, 2, 2, 3),
     Voittotilanne(3, 1, 3, 2, 3, 3),
@@ -175,11 +175,11 @@ winning_possibilities = [
     Voittotilanne(3, 1, 2, 2, 1, 3)
 ]
 def check_win():
-    for possibility in winning_possibilities:
-        if possibility.check(kissa):
+    for mahdollisuus in voittomahdollisuudet:
+        if mahdollisuus.check(kissa):
             status_label.configure(text="Kissa voitti!")
             return
-        elif possibility.check(hiiri):
+        elif mahdollisuus.check(hiiri):
             status_label.configure(text="Hiiri voitti!")
             return
     if len(kissa_pisteet) + len(hiiri_pisteet) == 9:
