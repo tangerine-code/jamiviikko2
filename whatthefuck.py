@@ -182,7 +182,10 @@ def check_win():
         elif possibility.check(hiiri):
             status_label.configure(text="Hiiri voitti!")
             return
-
+    if len(kissa_pisteet) + len(hiiri_pisteet) == 9:
+        status_label.configure(text="Tasapeli!")
+        #disable_game() tähän sit ku fiksataan tällanen
+        
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
 #______________________________STATUS LABEL_____________________________________
 
