@@ -30,20 +30,20 @@ class pelipainike(Button):
 
         self['image'] = self.kuva1
         
-        self.bind('<Enter>', self.onEnter1)
+        #self.bind('<Enter>', self.onEnter1)
         self.bind('<Leave>', self.onLeave1)        
 
-    def onEnter1(self, event):
-        if self.image(self.kuva1):
-            self.config(image=self.kuva2)
-        else:
-            pass
+    #def onEnter1(self, event):
+    #    if self.image(self.kuva1):
+    #        self.config(image=self.kuva2)
+    #    else:
+    #        pass
 
     def onLeave1(self, event):
-        if kissa_pisteet <= 0 and hiiri_pisteet <= 0:
+        if len(kissa_pisteet) <= 0 and len(hiiri_pisteet) <= 0:
             self.config(image=self.kuva1)
         else:
-            self.config(image=self.kissa)
+            pass
 
 def onEnter(event):
     """Kun kursori menee 'lopeta' napin päälle, kuva muuttuu tummemmaksi"""
