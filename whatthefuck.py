@@ -177,10 +177,10 @@ winning_possibilities = [
 def check_win():
     for possibility in winning_possibilities:
         if possibility.check(kissa):
-            print("Kissa voitti!")
+            status_label.configure(text="Kissa voitti!")
             return
         elif possibility.check(hiiri):
-            print("Hiiri voitti!")
+            status_label.configure(text="Hiiri voitti!")
             return
 
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
