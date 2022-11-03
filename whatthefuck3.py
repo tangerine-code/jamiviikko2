@@ -27,9 +27,11 @@ class pelipainike(Button):
 
         self.kuva1 = ImageTk.PhotoImage(Image.open(kuva1))
         self.kuva2 = ImageTk.PhotoImage(Image.open(kuva2))
+        #self.kuva3 = ImageTk.PhotoImage(Image.open(kuva3))
+        #self.kuva4 = ImageTk.PhotoImage(Image.open(kuva4))
 
         self['image'] = self.kuva1
-        
+
         self.bind('<Enter>', self.onEnter1)
         self.bind('<Leave>', self.onLeave1)        
 
@@ -93,8 +95,8 @@ root.attributes('-topmost', 1)
 
 lopeta = ImageTk.PhotoImage(Image.open(r'lopeta1.png'))
 uudestaan = ImageTk.PhotoImage(Image.open(r'uudestaan1.png'))
-kissa = PhotoImage(file=r"cat.png")
-hiiri = PhotoImage(file=r"mouse.png")
+kissa = PhotoImage(file = r"cat.png")
+hiiri = PhotoImage(file = r"mouse.png")
 koskematon = r"not_pressed.png"
 hovervari = r"hover.png"
 iconi =PhotoImage(r'icon.ico')
@@ -187,7 +189,6 @@ voittomahdollisuudet = [
     Voittotilanne(3, 1, 2, 2, 1, 3)
 ]
 
-
 def voittajan_tarkistus():
     for mahdollisuus in voittomahdollisuudet:
         if mahdollisuus.check(kissa):
@@ -198,8 +199,7 @@ def voittajan_tarkistus():
             return
     if len(kissa_pisteet) + len(hiiri_pisteet) == 9:
         status_label.configure(text="Tasapeli!")
-
-        
+   
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
 #______________________________STATUS LABEL_____________________________________
 
