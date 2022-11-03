@@ -14,9 +14,7 @@ from PIL import Image, ImageTk
 #_____________________________FUNKTIOT JA LUOKAT________________________________
 
 def uusiksi():
-    """Käynnistää ikkunan uudestaan. Funktio ei palauta mitään,
-    jos haluaa laskea voitot ja häviöt niin täytyy ottaa talteen kaikki
-     tiedot ennen tämän kutsumista kutsumista!"""
+    """Käynnistää ikkunan uudestaan"""
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
