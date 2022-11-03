@@ -22,7 +22,7 @@ def uusiksi():
 
 class pelipainike(Button):
     """Pelialueen ruudukon nappien hover."""
-    def __init__(self, root, kuva1, kuva2, *args, **kwargs):
+    def __init__(self, root, kuva1, kuva2, kuva3, kuva4, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
 
         self.kuva1 = ImageTk.PhotoImage(Image.open(kuva1))
@@ -34,16 +34,18 @@ class pelipainike(Button):
         self.bind('<Leave>', self.onLeave1)        
 
     def onEnter1(self, event):
-        if self.image(self.kuva1):
+        if self.kuva1:
             self.config(image=self.kuva2)
-        else:
-            pass
+        elif self.kuva3:
+            self.config(image=self.kuva3)
+        elif self.kuva4:
+            self.config(image = self.kuva4)
 
     def onLeave1(self, event):
-        if kissa_pisteet <= 0 and hiiri_pisteet <= 0:
+        if len(kissa_pisteet) <= 0 and len(hiiri_pisteet) <= 0:
             self.config(image=self.kuva1)
         else:
-            self.config(image=self.kissa)
+            pass
 
 def onEnter(event):
     """Kun kursori menee 'lopeta' napin päälle, kuva muuttuu tummemmaksi"""
@@ -109,7 +111,7 @@ class XOPoint:
         self.x = x  
         self.y = y  
         self.value = None  
-        self.nappi = pelipainike(play_area, kuva1 = koskematon, kuva2 = hovervari, borderwidth = 0, width = 100, height = 100, command = self.set)
+        self.nappi = pelipainike(play_area, kuva1 = koskematon, kuva2 = hovervari, kuva3 = kissa, kuva4 = hiiri, borderwidth = 0, width = 100, height = 100, command = self.set)
         self.nappi.grid(row = x, column = y, pady = 5, padx = 5)
 
     def set(self):
@@ -127,7 +129,15 @@ class XOPoint:
                 status_label.configure(text="Kissan vuoro")
                 hiiri_pisteet.append(self)
                 vuoro = kissa
-        check_win()
+        voittajan_tarkistus()
+    
+    def reset(self):
+        self.nappi.configure(text="", bg='lightgray')
+        if self.value == kissa:
+            kissa_pisteet.remove(self)
+        elif self.value == hiiri:
+            hiiri_pisteet.remove(self)
+        self.value = None
 
 for x in range(1, 4):
     for y in range(1, 4):
@@ -174,7 +184,9 @@ voittomahdollisuudet = [
     Voittotilanne(1, 1, 2, 2, 3, 3),
     Voittotilanne(3, 1, 2, 2, 1, 3)
 ]
-def check_win():
+
+
+def voittajan_tarkistus():
     for mahdollisuus in voittomahdollisuudet:
         if mahdollisuus.check(kissa):
             status_label.configure(text="Kissa voitti!")
@@ -184,7 +196,7 @@ def check_win():
             return
     if len(kissa_pisteet) + len(hiiri_pisteet) == 9:
         status_label.configure(text="Tasapeli!")
-        #disable_game() tähän sit ku fiksataan tällanen
+
         
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
 #______________________________STATUS LABEL_____________________________________
