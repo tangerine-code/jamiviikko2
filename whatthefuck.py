@@ -122,9 +122,11 @@ class XOPoint:
             self.nappi.configure(image = vuoro)
             self.value = vuoro 
             if vuoro == kissa:
+                status_label.configure(text="Hiiren vuoro")
                 kissa_pisteet += 1
                 vuoro = hiiri
             elif vuoro == hiiri:
+                status_label.configure(text="Kissan vuoro")
                 hiiri_pisteet += 1
                 vuoro = kissa
 
@@ -133,7 +135,11 @@ for x in range(1, 4):
         XOPoint(x, y)
 
 play_area.pack(pady = 10, padx = 10, side = tk.LEFT)
+#______________________________STATUS LABEL_____________________________________
 
+status_label = tk.Label(root, text=" ", font=('Verdana', '15', BOLD), 
+fg='#543f2a')
+status_label.place(x=410, y=130)
 #______________________________PELAAJIEN NIMET__________________________________
 
 lbl = Label(root, text="Pelaaja 1: Kissa", font=('Verdana', '15', BOLD), 
@@ -158,7 +164,7 @@ uudestaan_nappi.place(x=400, y=200)
 uudestaan_nappi.bind('<Enter>',  onEnter2)
 uudestaan_nappi.bind('<Leave>',  onLeave2)
 #___________________________________MUUT________________________________________
-
+status_label.configure(text="Kissan vuoro")
 windll.shcore.SetProcessDpiAwareness(1)
 root.iconbitmap(iconi)
 root.mainloop()
